@@ -48,6 +48,21 @@ Gleichgewicht) und [folk-theorem-demo](https://sebastianhanisch-folk-theorem-dem
 """
 )
 
+# erklaerseite:einfach:start (erzeugt von tools/set_demo_explainer.py (Website-Repo) aus tools/content/explainers/algorithmische-kollusion-erklaert.json, nicht von Hand ändern)
+with st.expander("💬 In einfachen Worten"):
+    st.markdown(
+        """
+Zwei Preisprogramme setzen jede Woche den Preis für dieselbe Frachtstrecke. Sie kennen weder die Nachfrage noch den Plan des anderen und schicken sich keine Nachricht. Sie lernen nur aus Erfahrung: Preis gesetzt, Gewinn gesehen, beim nächsten Mal besser wählen.
+
+Trotzdem können beide bei Preisen landen, die über dem Wettbewerbspreis liegen. Die Demo misst das mit dem **Kollusionsindex**: Null heißt Gewinn wie im Wettbewerb, eins heißt gemeinsamer Bestgewinn.
+
+Interessant ist, **was** die Preise oben hält. Eine gelernte Vergeltung lässt sich messen. Aber auch Programme, die den letzten Preis des anderen gar nicht sehen, landen oben, sogar höher. Alle Befunde sind Simulationen unter bestimmten Annahmen, keine Aussage über reale Märkte und keine rechtliche Bewertung.
+
+[Ausführlich und verständlich erklärt, mit Fachteil](https://sebastianhanisch.net/algorithmische-kollusion-erklaert.html)
+        """
+    )
+# erklaerseite:einfach:end
+
 with st.expander("So funktioniert der Markt", expanded=True):
     st.markdown(
         """
@@ -211,6 +226,27 @@ st.markdown(
 st.markdown("---")
 
 with st.expander("📐 Mathematische Formulierung"):
+    # erklaerseite:lesehilfe:start (erzeugt von tools/set_demo_explainer.py (Website-Repo) aus tools/content/explainers/algorithmische-kollusion-erklaert.json, nicht von Hand ändern)
+    st.markdown(
+        r"""
+**Lesehilfe.** Gegeben sind ein Logit-Markt mit zwei Anbietern, Grenzkosten $c$ und ein Raster von $m$ Preisen sowie zwei Q-Lernende mit Lernrate $\alpha$, Voraussicht $\gamma$ und Erkundungsabfall $\beta$. Gesucht ist der Kollusionsindex $\Delta$ des Dauerzustands und die Frage, ob eine einmalige Abweichung durch gelernte Vergeltung bestraft wird.
+
+| Symbol | Bedeutung |
+|---|---|
+| $p_i$, $q_i$, $\pi_i$ | Preis, Nachfrageanteil und Gewinn von Anbieter $i$ |
+| $c$, $\mu$ | Grenzkosten; Streuungsparameter der Logit-Nachfrage (je kleiner, desto schärfer reagiert die Nachfrage auf Preisunterschiede) |
+| $a$, $a_0$ | Qualitätsindex der Anbieter und Index des Außenangebots (in $Q(s,a)$ steht $a$ dagegen für den gewählten Preis) |
+| $p_N$, $p_M$ | Nash-Preis (Wettbewerb) und gemeinsamer Monopolpreis |
+| $\pi_N$, $\pi_M$, $\bar\pi$ | Gewinn je Anbieter bei $p_N$, bei $p_M$ und im Mittel des Dauerzustands |
+| $\Delta$ | Kollusionsindex: 0 bei Nash-Gewinn, 1 beim gemeinsamen Monopolgewinn |
+| $s$, $Q(s,a)$ | Zustand (beide Preise der Vorperiode) und geschätzter Wert, in ihm den Preis $a$ zu setzen |
+| $\alpha$, $\gamma$ | Lernrate; Gewicht späterer Gewinne (Voraussicht) |
+| $\beta$, $\varepsilon_t$ | Erkundungsabfall; Wahrscheinlichkeit eines zufälligen Preises in Periode $t$ |
+
+[Schritt für Schritt erklärt, mit Herleitung und Literatur](https://sebastianhanisch.net/algorithmische-kollusion-erklaert.html#fachleute)
+        """
+    )
+    # erklaerseite:lesehilfe:end
     st.markdown(
         r"""
 **Nachfrage.** Anbieter $i$ mit Preis $p_i$ hat den Anteil $q_i = \dfrac{e^{(a - p_i)/\mu}}{\sum_j e^{(a - p_j)/\mu} + e^{a_0/\mu}}$ und den Gewinn
