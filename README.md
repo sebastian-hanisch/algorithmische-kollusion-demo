@@ -1,7 +1,6 @@
 # Algorithmische Kollusion: lernen zwei Q-Agenten sich zu einigen? – Streamlit-Demo
 
-<!-- Nach dem Deploy direkt hierher den Live-Link setzen (Leerzeile davor und danach):
-**[→ Demo live ausprobieren](https://sebastianhanisch-algorithmische-kollusion-demo.streamlit.app/)** -->
+**[→ Demo live ausprobieren](https://sebastianhanisch-algorithmische-kollusion-demo.streamlit.app/)**
 
 Neuntes und letztes Kernstück der **Wiederholte-Spiele-Linie** in der „Konzepte“-Reihe für die Website „Sebastian Hanisch – Operations Research und Machine Learning“.
 Hier fließen die Stücke zusammen: Was Wiederholung tragen kann ([folk-theorem-demo](https://sebastianhanisch-folk-theorem-demo.streamlit.app/)), Strafen bei Beobachtung
