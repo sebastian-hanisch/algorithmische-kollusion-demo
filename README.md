@@ -3,7 +3,7 @@
 **[→ Demo live ausprobieren](https://sebastianhanisch-algorithmische-kollusion-demo.streamlit.app/)**
 
 Neuntes und letztes Kernstück der **Wiederholte-Spiele-Linie** in der „Konzepte“-Reihe für die Website „Sebastian Hanisch – Operations Research und Machine Learning“.
-Hier fließen die Stücke zusammen: Was Wiederholung tragen kann ([folk-theorem-demo](https://sebastianhanisch-folk-theorem-demo.streamlit.app/)), Strafen bei Beobachtung
+Hier fließen die Stücke zusammen: Was Wiederholung leisten kann ([folk-theorem-demo](https://sebastianhanisch-folk-theorem-demo.streamlit.app/)), Strafen bei Beobachtung
 ([green-porter-demo](https://sebastianhanisch-green-porter-demo.streamlit.app/)) und das Lernen aus Erfahrung
 ([q-learning-demo](https://sebastianhanisch-q-learning-demo.streamlit.app/)). Zwei **Preis-Algorithmen** lernen ohne jede Absprache, und die Demo misst, wo sie landen.
 
@@ -39,9 +39,9 @@ Alle Zahlen: 20 feste Zufalls-Seeds je Konfiguration, Voreinstellung α = 0,15, 
 |---|---|---|
 | Referenzpreise | Nash-Preis 1,473, Monopolpreis 1,925 (stimmt mit der Literatur überein). Das Einmalspiel hat auf dem Raster zwei reine Nash-Gleichgewichte mit Δ = −0,02 und 0,12. | `test_reference_prices_and_grid_nash_indices` |
 | Landen sie über dem Wettbewerbspreis? | Ja: In der Voreinstellung liegt der mediane Index bei **0,79** (kleinster 0,61, größter 0,95), alle 20 Läufe konvergieren (im Median 613.679 Perioden), alle 20 liegen über 0,5. | `test_default_configuration` |
-| Hält eine gelernte Vergeltung? | Teils: Eine einmalige Abweichung auf den Nash-Preis lohnt sich in **2 von 20** Läufen (diskontiert über 25 Perioden), in 18 trägt die Strafe. Der Rivale senkt seinen Preis in 18 von 20 Läufen; im Median kehrt er nach 5 Perioden zum Basispfad zurück, in 9 Läufen innerhalb von 25 Perioden nicht Periode für Periode (das schließt eine verschobene Phase eines Preiszyklus ein). Größter Verlust der Abweichung 0,408, größter Gewinn 0,023. | `test_deviation_statistics_in_the_default_configuration` |
+| Hält eine gelernte Vergeltung? | Teils: Eine einmalige Abweichung auf den Nash-Preis lohnt sich in **2 von 20** Läufen (diskontiert über 25 Perioden), in 18 greift die Strafe. Der Rivale senkt seinen Preis in 18 von 20 Läufen; im Median kehrt er nach 5 Perioden zum Basispfad zurück, in 9 Läufen innerhalb von 25 Perioden nicht Periode für Periode (das schließt eine verschobene Phase eines Preiszyklus ein). Größter Verlust der Abweichung 0,408, größter Gewinn 0,023. | `test_deviation_statistics_in_the_default_configuration` |
 | Braucht es Gedächtnis? | **Nein.** Ohne Gedächtnis liegt der mediane Index bei **0,95** (0,87 bis 0,99), höher als mit Gedächtnis (0,79); alle 20 Läufe enden bei einem festen Preis. Ein Abweichungstest ist dort nicht definiert, weil der Rivale den Zustand nicht sieht. | `test_without_memory_every_run_ends_at_a_single_price_and_no_deviation_test_exists` |
-| Zählt die Zukunft (γ)? | Der mediane Index steigt mit γ: 0,21 (γ = 0), 0,29 (0,25), 0,38 (0,5), 0,60 (0,75), 0,79 (0,95). Bei γ = 0 trägt die Strafe nur in 3 von 20 Läufen. | `test_median_index_rises_with_the_shadow_of_the_future` |
+| Zählt die Zukunft (γ)? | Der mediane Index steigt mit γ: 0,21 (γ = 0), 0,29 (0,25), 0,38 (0,5), 0,60 (0,75), 0,79 (0,95). Bei γ = 0 greift die Strafe nur in 3 von 20 Läufen. | `test_median_index_rises_with_the_shadow_of_the_future` |
 | Erkundung und Lernrate | β = 0,4·10⁻⁵ (Calvano et al.): mediane Δ 0,93 nach im Median 1.804.668 Perioden; β = 10·10⁻⁵: 0,70; β = 20·10⁻⁵: 0,71 nach 149.808 Perioden. Lernrate α von 0,05 bis 0,5: mediane Δ 0,71, 0,78, 0,79, 0,77, 0,72, ohne einfachen Trend. | `test_exploration_decay_and_learning_rate` |
 
 ### Befunde gegenüber dem Plan

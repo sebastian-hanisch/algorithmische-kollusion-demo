@@ -37,13 +37,13 @@ st.markdown(
     """
 Bisher saßen Spieler mit festen Strategien am Tisch. Hier **lernen** sie: Zwei Preis-Algorithmen setzen jede Woche den Preis für eine Frachtrelation, sehen nur ihren
 eigenen Gewinn und probieren aus. Sie sprechen sich nie ab, sie tauschen keine Nachricht. Trotzdem können sie bei Preisen **oberhalb** des Wettbewerbspreises landen,
-und das haben Calvano, Calzolari, Denicolò und Pastorello (2020) in Simulationen gezeigt. Diese Demo baut dasselbe Modell nach und misst, was davon trägt.
+und das haben Calvano, Calzolari, Denicolò und Pastorello (2020) in Simulationen gezeigt. Diese Demo baut dasselbe Modell nach und misst, was davon gilt.
 
 Es ist ein **Simulationsbefund unter bestimmten Annahmen**, keine Aussage über reale Märkte und keine rechtliche Bewertung.
 
 Weiter unten: **❓ Kernfrage**, vier Experimente (**🔬**, aus einer vorgerechneten Tabelle über je 20 Zufalls-Seeds), **🚧 Wo die Annahmen enden** und der Expander
 **📐 Mathematische Formulierung**. Vorgänger in der Linie sind [green-porter-demo](https://sebastianhanisch-green-porter-demo.streamlit.app/) (Preiskriege im
-Gleichgewicht) und [folk-theorem-demo](https://sebastianhanisch-folk-theorem-demo.streamlit.app/) (was Wiederholung tragen kann); das Lernverfahren steht in
+Gleichgewicht) und [folk-theorem-demo](https://sebastianhanisch-folk-theorem-demo.streamlit.app/) (was Wiederholung leisten kann); das Lernverfahren steht in
 [q-learning-demo](https://sebastianhanisch-q-learning-demo.streamlit.app/).
 """
 )
@@ -138,7 +138,7 @@ st.caption(f"Dauerzustand (Preis Anbieter 1; Preis Anbieter 2), Rechenzeit {fmt(
 
 # --- Kernfrage -----------------------------------------------------------------------------------------------------------------------------
 
-st.markdown("## ❓ Kernfrage: Lernen zwei Q-Agenten überhöhte Preise, und trägt die Vergeltung?")
+st.markdown("## ❓ Kernfrage: Lernen zwei Q-Agenten überhöhte Preise, und greift die Vergeltung?")
 level, sentence = E.verdict(an, settings)
 {"success": st.success, "warning": st.warning, "info": st.info}[level](sentence)
 
@@ -203,7 +203,7 @@ else:
         sd = E.summarize(both)
         st.plotly_chart(build_deviation_gains(both["runs"]), width="stretch", key="devgain_chart")
         st.info(f"In der Voreinstellung lohnt sich die einmalige Abweichung auf den Nash-Preis in {sd['dev_n'] - sd['dev_unprofitable']} von {sd['dev_n']} Läufen (diskontierter Gewinn "
-                f"über {C.DEVIATION_HORIZON} Perioden über null); in {sd['dev_unprofitable']} von {sd['dev_n']} trägt die gelernte Strafe. Der Rivale senkt seinen Preis in "
+                f"über {C.DEVIATION_HORIZON} Perioden über null); in {sd['dev_unprofitable']} von {sd['dev_n']} greift die gelernte Strafe. Der Rivale senkt seinen Preis in "
                 f"{sd['dev_rival_cuts']} von {sd['dev_n']} Läufen.")
 st.markdown("---")
 

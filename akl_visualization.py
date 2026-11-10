@@ -67,9 +67,9 @@ def build_spread(entries: list[dict], xlabel: str, key: str = "delta", title: st
 
 
 def build_deviation_gains(runs: list[dict]) -> go.Figure:
-    """Diskontierter Gewinn der Abweichung je Lauf, sortiert; unter null = die Strafe trägt."""
+    """Diskontierter Gewinn der Abweichung je Lauf, sortiert; unter null = die Strafe greift."""
     vals = sorted(r["dev_gain"] for r in runs if r["dev_gain"] is not None)
     colors = [C.COLOR_A if v < 0 else C.COLOR_B for v in vals]
     fig = go.Figure(go.Bar(x=list(range(1, len(vals) + 1)), y=vals, marker_color=colors, hovertemplate="Rang %{x}<br>Gewinn %{y:.3f}<extra></extra>"))
-    fig.update_layout(**_LAYOUT, title="Gewinn der Abweichung je Lauf (negativ = Strafe trägt)", xaxis_title="Läufe, sortiert", yaxis_title="diskontierter Gewinn")
+    fig.update_layout(**_LAYOUT, title="Gewinn der Abweichung je Lauf (negativ = Strafe greift)", xaxis_title="Läufe, sortiert", yaxis_title="diskontierter Gewinn")
     return _lock(fig)

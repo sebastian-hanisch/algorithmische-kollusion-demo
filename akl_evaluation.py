@@ -86,7 +86,7 @@ def verdict(an: Analysis, settings: Settings) -> tuple[str, str]:
                 f"weil der Rivale seinen Preis um bis zu {fmt(-d.rival_dip)} senkt.")
     else:
         tail = (f" Der Abweichungstest: Die Abweichung auf den Nash-Preis **lohnt sich** hier (+{fmt(d.gain, 3)} diskontierter Gewinn über {C.DEVIATION_HORIZON} Perioden), "
-                "obwohl der Rivale reagiert: Die gelernte Vergeltung trägt in diesem Lauf nicht.")
+                "obwohl der Rivale reagiert: Die gelernte Vergeltung greift in diesem Lauf nicht.")
     return ("warning" if r.delta >= 0.5 else "info"), head + tail
 
 
