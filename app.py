@@ -229,7 +229,7 @@ with st.expander("📐 Mathematische Formulierung"):
     # erklaerseite:lesehilfe:start (erzeugt von tools/set_demo_explainer.py (Website-Repo) aus tools/content/explainers/algorithmische-kollusion-erklaert.json, nicht von Hand ändern)
     st.markdown(
         r"""
-**Lesehilfe.** Gegeben sind ein Logit-Markt mit zwei Anbietern, Grenzkosten $c$ und ein Raster von $m$ Preisen sowie zwei Q-Lernende mit Lernrate $\alpha$, Voraussicht $\gamma$ und Erkundungsabfall $\beta$. Gesucht ist der Kollusionsindex $\Delta$ des Dauerzustands und die Frage, ob eine einmalige Abweichung durch gelernte Vergeltung bestraft wird.
+**Lesehilfe.** Gegeben sind ein Logit-Markt mit zwei Anbietern, Grenzkosten $c$ und ein Raster von $m$ Preisen sowie zwei Q-Lernende mit Lernrate $\alpha$, Voraussicht $\gamma$ und Explorationsabfall $\beta$. Gesucht ist der Kollusionsindex $\Delta$ des Dauerzustands und die Frage, ob eine einmalige Abweichung durch gelernte Vergeltung bestraft wird.
 
 | Symbol | Bedeutung |
 |---|---|
@@ -241,7 +241,7 @@ with st.expander("📐 Mathematische Formulierung"):
 | $\Delta$ | Kollusionsindex: 0 bei Nash-Gewinn, 1 beim gemeinsamen Monopolgewinn |
 | $s$, $Q(s,a)$ | Zustand (beide Preise der Vorperiode) und geschätzter Wert, in ihm den Preis $a$ zu setzen |
 | $\alpha$, $\gamma$ | Lernrate; Gewicht späterer Gewinne (Voraussicht) |
-| $\beta$, $\varepsilon_t$ | Erkundungsabfall; Wahrscheinlichkeit eines zufälligen Preises in Periode $t$ |
+| $\beta$, $\varepsilon_t$ | Explorationsabfall; Wahrscheinlichkeit eines zufälligen Preises in Periode $t$ |
 
 [Schritt für Schritt erklärt, mit Herleitung und Literatur](https://sebastianhanisch.net/algorithmische-kollusion-erklaert.html#fachleute)
         """
