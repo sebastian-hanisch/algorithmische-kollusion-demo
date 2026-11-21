@@ -124,7 +124,7 @@ class LearningResult:
     avg_profit: float
     delta: float
     avg_price: float
-    trace: list[tuple[int, float, float]] = field(default_factory=list)   # (Periode, mittlerer Preis im Fenster, Erkundung ε)
+    trace: list[tuple[int, float, float]] = field(default_factory=list)   # (Periode, mittlerer Preis im Fenster, Exploration ε)
     q: list | None = None                                                  # nur wenn angefordert
 
 

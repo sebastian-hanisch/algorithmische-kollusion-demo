@@ -25,7 +25,7 @@ def build_learning_curve(trace, pn: float, pm: float) -> go.Figure:
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=t, y=[p[1] for p in trace], mode="lines", name="mittlerer Preis im Fenster", line=dict(color=C.COLOR_A, width=2),
                              hovertemplate="Periode %{x:,.0f}<br>Preis %{y:.3f}<extra></extra>"))
-    fig.add_trace(go.Scatter(x=t, y=[p[2] for p in trace], mode="lines", name="Erkundung ε (rechte Achse)", line=dict(color=C.COLOR_NEUTRAL, width=2), yaxis="y2",
+    fig.add_trace(go.Scatter(x=t, y=[p[2] for p in trace], mode="lines", name="Exploration ε (rechte Achse)", line=dict(color=C.COLOR_NEUTRAL, width=2), yaxis="y2",
                              hovertemplate="Periode %{x:,.0f}<br>ε %{y:.3f}<extra></extra>"))
     _reference_lines(fig, pn, pm)
     fig.update_layout(**_LAYOUT, title="Lernkurve: mittlerer Preis aller Perioden eines Fensters", xaxis_title="Periode",

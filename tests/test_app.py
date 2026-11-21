@@ -70,7 +70,7 @@ def test_permalink_is_clamped_and_snapped():
 
 def test_the_page_explains_the_learners_and_the_index():
     text = " ".join(m.value for m in _fresh_app().markdown)
-    for word in ("Q-Lernen", "Erkundung", "Gedächtnis", "Voraussicht", "Kollusionsindex", "Nash-Preis", "Monopolpreis"):
+    for word in ("Q-Lernen", "Exploration", "Gedächtnis", "Voraussicht", "Kollusionsindex", "Nash-Preis", "Monopolpreis"):
         assert word in text, word
 
 

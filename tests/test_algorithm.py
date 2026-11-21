@@ -1,4 +1,4 @@
-"""Einheiten des Kerns an Handbeispielen: Markt, Raster, Q-Update, Erkundung, Zyklus, Abweichungstest, Lernschleife."""
+"""Einheiten des Kerns an Handbeispielen: Markt, Raster, Q-Update, Exploration, Zyklus, Abweichungstest, Lernschleife."""
 
 import math
 

@@ -21,7 +21,7 @@ dem Wettbewerbspreis liegen. Interessant ist, **was** diese Preise hält: eine g
 ## Modell
 
 Logit-Nachfrage (Qualität 2, Außenangebot 0, Preissensitivität 0,25, Grenzkosten 1), 15 Preise auf einem Raster, das etwas über Nash- und Monopolpreis hinausreicht.
-Zwei unabhängige tabellarische Q-Lernende, Zustand = die beiden letzten Preise, Erkundung ε = e^(−β·t). Kennzahl: **Kollusionsindex** Δ = (π̄ − π_N) / (π_M − π_N).
+Zwei unabhängige tabellarische Q-Lernende, Zustand = die beiden letzten Preise, Exploration ε = e^(−β·t). Kennzahl: **Kollusionsindex** Δ = (π̄ − π_N) / (π_M − π_N).
 
 ## Methodik
 
@@ -42,7 +42,7 @@ Alle Zahlen: 20 feste Zufalls-Seeds je Konfiguration, Voreinstellung α = 0,15, 
 | Hält eine gelernte Vergeltung? | Teils: Eine einmalige Abweichung auf den Nash-Preis lohnt sich in **2 von 20** Läufen (diskontiert über 25 Perioden), in 18 greift die Strafe. Der Rivale senkt seinen Preis in 18 von 20 Läufen; im Median kehrt er nach 5 Perioden zum Basispfad zurück, in 9 Läufen innerhalb von 25 Perioden nicht Periode für Periode (das schließt eine verschobene Phase eines Preiszyklus ein). Größter Verlust der Abweichung 0,408, größter Gewinn 0,023. | `test_deviation_statistics_in_the_default_configuration` |
 | Braucht es Gedächtnis? | **Nein.** Ohne Gedächtnis liegt der mediane Index bei **0,95** (0,87 bis 0,99), höher als mit Gedächtnis (0,79); alle 20 Läufe enden bei einem festen Preis. Ein Abweichungstest ist dort nicht definiert, weil der Rivale den Zustand nicht sieht. | `test_without_memory_every_run_ends_at_a_single_price_and_no_deviation_test_exists` |
 | Zählt die Zukunft (γ)? | Der mediane Index steigt mit γ: 0,21 (γ = 0), 0,29 (0,25), 0,38 (0,5), 0,60 (0,75), 0,79 (0,95). Bei γ = 0 greift die Strafe nur in 3 von 20 Läufen. | `test_median_index_rises_with_the_shadow_of_the_future` |
-| Erkundung und Lernrate | β = 0,4·10⁻⁵ (Calvano et al.): mediane Δ 0,93 nach im Median 1.804.668 Perioden; β = 10·10⁻⁵: 0,70; β = 20·10⁻⁵: 0,71 nach 149.808 Perioden. Lernrate α von 0,05 bis 0,5: mediane Δ 0,71, 0,78, 0,79, 0,77, 0,72, ohne einfachen Trend. | `test_exploration_decay_and_learning_rate` |
+| Exploration und Lernrate | β = 0,4·10⁻⁵ (Calvano et al.): mediane Δ 0,93 nach im Median 1.804.668 Perioden; β = 10·10⁻⁵: 0,70; β = 20·10⁻⁵: 0,71 nach 149.808 Perioden. Lernrate α von 0,05 bis 0,5: mediane Δ 0,71, 0,78, 0,79, 0,77, 0,72, ohne einfachen Trend. | `test_exploration_decay_and_learning_rate` |
 
 ### Befunde gegenüber dem Plan
 
@@ -62,7 +62,7 @@ dafür wurde nicht weiter untersucht.
 
 ## Verifikation
 
-- **Kern:** je Einheit eine Handrechnung (Logit-Anteile bei gleichen Preisen, Raster, TD-Update, Erkundungsplan, Anfangs-Q, Index, Zyklus, Abweichungstest mit und ohne Strafe).
+- **Kern:** je Einheit eine Handrechnung (Logit-Anteile bei gleichen Preisen, Raster, TD-Update, Explorationsplan, Anfangs-Q, Index, Zyklus, Abweichungstest mit und ohne Strafe).
 - **Orakel** (`tests/test_oracle_algorithmische_kollusion.py`): (1) Nash- und Monopolpreis gegen `scipy` (Nullstelle der abgeleiteten Gewinnfunktion, beschränkte
   Minimierung); (2) Gewinntabelle gegen eine direkte numpy-Rechnung; (3) Ein-Agenten-Grenzfall: gegen einen festen Rivalen lernt der Agent die beste Antwort aus
   der Aufzählung; (4) die Lernschleife gegen eine zweite, schlichte Implementierung mit denselben Zufallszahlen, Q-Tabellen exakt gleich; (5) der Dauerzyklus gegen

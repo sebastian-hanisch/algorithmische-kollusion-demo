@@ -80,7 +80,7 @@ with st.expander("Die beiden Lernenden: wer macht was?", expanded=True):
         "| Baustein | Bedeutung | Regler |\n|---|---|---|\n"
         "| **Q-Lernen** | Jeder Agent führt eine Tabelle Q(Zustand, Preis): den geschätzten Wert, in diesem Zustand diesen Preis zu setzen. Nach jeder Periode wird der Eintrag um α "
         "in Richtung „Gewinn heute + γ · bester Wert morgen“ verschoben. | α, γ |\n"
-        "| **Erkundung** | Mit Wahrscheinlichkeit ε probiert ein Agent einen zufälligen Preis, sonst den besten bekannten. ε fällt von 1 mit der Zeit gegen 0 (ε = e^(−β·t)). | β |\n"
+        "| **Exploration** | Mit Wahrscheinlichkeit ε probiert ein Agent einen zufälligen Preis, sonst den besten bekannten. ε fällt von 1 mit der Zeit gegen 0 (ε = e^(−β·t)). | β |\n"
         "| **Gedächtnis** | Der Zustand ist der letzte Preis beider (15 × 15 Zustände). Ohne Gedächtnis gibt es nur einen Zustand: Der Agent kann nicht auf den letzten Preis des anderen "
         "reagieren. | Gedächtnis |\n"
         "| **Voraussicht γ** | Wie stark spätere Gewinne zählen. γ = 0: nur die laufende Periode. | γ |"
@@ -104,7 +104,7 @@ with st.sidebar:
     st.markdown("**Lernen**")
     alpha = st.slider("Lernrate α", *bounds("alpha_slider"), step=C.ALPHA_STEP, key="alpha_slider", help="Wie weit ein Q-Wert pro Erfahrung in Richtung der neuen Schätzung wandert.")
     gamma = st.slider("Voraussicht γ", *bounds("gamma_slider"), step=C.GAMMA_STEP, key="gamma_slider", help="Gewicht späterer Gewinne gegenüber dem heutigen.")
-    beta = st.slider("Erkundungsabfall β (in 10⁻⁵ je Periode)", *bounds("beta_slider"), step=C.BETA_STEP, key="beta_slider",
+    beta = st.slider("Explorationsabfall β (in 10⁻⁵ je Periode)", *bounds("beta_slider"), step=C.BETA_STEP, key="beta_slider",
                      help="Je größer, desto schneller hört das Ausprobieren auf. Der Standard ist 2·10⁻⁵; Calvano et al. nutzen 0,4·10⁻⁵ (steht in der Tabelle unten).")
     st.markdown("**Gedächtnis**")
     memory = st.selectbox("Zustandsgedächtnis", C.MEMORY_KEYS, key="memory_select", format_func=lambda k: C.MEMORY_LABELS[k],
@@ -132,7 +132,7 @@ m2.metric("Kollusionsindex Δ", fmt(r.delta), delta=E.level_of(r.delta), delta_c
 m3.metric("Perioden bis Konvergenz", fmt_int(r.periods), delta="konvergiert" if r.converged else "Obergrenze erreicht", delta_color="off")
 m4.metric("Länge des Preiszyklus", f"{len(r.cycle_states)}", delta="1 = fester Preis", delta_color="off")
 st.plotly_chart(build_learning_curve(r.trace, mk.nash_price, mk.monopoly_price), width="stretch", key="learning_chart")
-st.caption("Zu Beginn probieren beide fast nur zufällig aus (ε nahe 1), der Durchschnitt liegt in der Rastermitte. Mit fallender Erkundung setzen sich die gelernten Preise durch.")
+st.caption("Zu Beginn probieren beide fast nur zufällig aus (ε nahe 1), der Durchschnitt liegt in der Rastermitte. Mit fallender Exploration setzen sich die gelernten Preise durch.")
 cyc = " → ".join(f"({fmt(a)}; {fmt(b)})" for a, b in r.cycle_prices)
 st.caption(f"Dauerzustand (Preis Anbieter 1; Preis Anbieter 2), Rechenzeit {fmt(elapsed, 1)} s: {cyc}")
 
@@ -184,19 +184,19 @@ else:
         st.info(f"Ohne Gedächtnis liegt der Index im Median bei {fmt(sn['median'])}, mit Gedächtnis bei {fmt(sb['median'])}. "
                 "Überhöhte Preise brauchen also keine gelernte Vergeltung: Auch Agenten, die den letzten Preis des anderen gar nicht sehen, landen oberhalb des Nash-Preises.")
 
-    st.subheader("🔬 Experiment: Wie wichtig sind Lernrate und Erkundung?")
+    st.subheader("🔬 Experiment: Wie wichtig sind Lernrate und Exploration?")
     col_a, col_b = st.columns(2)
     with col_a:
         sa = E.sweep_series("alpha")
         st.plotly_chart(build_spread([{"x": e["x"], "runs": e["config"]["runs"]} for e in sa], "Lernrate α", title="Δ über die Lernrate α"), width="stretch", key="alpha_chart")
     with col_b:
         sbeta = E.sweep_series("beta")
-        st.plotly_chart(build_spread([{"x": e["x"], "runs": e["config"]["runs"]} for e in sbeta], "Erkundungsabfall β (10⁻⁵)", title="Δ über den Erkundungsabfall β", log_x=True),
+        st.plotly_chart(build_spread([{"x": e["x"], "runs": e["config"]["runs"]} for e in sbeta], "Explorationsabfall β (10⁻⁵)", title="Δ über den Explorationsabfall β", log_x=True),
                         width="stretch", key="beta_chart")
     am = [e["summary"]["median"] for e in sa]
-    st.info(f"Lernrate: Der mediane Index liegt zwischen {fmt(min(am))} und {fmt(max(am))}, ohne einfachen Trend. Erkundung: bei β = {fmt(sbeta[0]['x'], 1)}·10⁻⁵ "
+    st.info(f"Lernrate: Der mediane Index liegt zwischen {fmt(min(am))} und {fmt(max(am))}, ohne einfachen Trend. Exploration: bei β = {fmt(sbeta[0]['x'], 1)}·10⁻⁵ "
             f"(Calvano et al.) {fmt(sbeta[0]['summary']['median'])} mit im Median {fmt_int(sbeta[0]['summary']['periods_median'])} Perioden, bei β = {fmt(sbeta[-1]['x'], 0)}·10⁻⁵ "
-            f"{fmt(sbeta[-1]['summary']['median'])} mit {fmt_int(sbeta[-1]['summary']['periods_median'])} Perioden. Die langsamste Erkundung landet im Median höher als die schnellste, braucht aber ein Vielfaches der Perioden.")
+            f"{fmt(sbeta[-1]['summary']['median'])} mit {fmt_int(sbeta[-1]['summary']['periods_median'])} Perioden. Die langsamste Exploration landet im Median höher als die schnellste, braucht aber ein Vielfaches der Perioden.")
 
     st.subheader("🔬 Experiment: Hält die Vergeltung?")
     if both:
@@ -266,7 +266,7 @@ Strategie. Bewertet wird $\sum_{t<25}\gamma^t \pi_1^{\mathrm{Abw.}}(t) - \sum_{t
 
 **Literatur.** Calvano, Calzolari, Denicolò und Pastorello (2020), *Artificial Intelligence, Algorithmic Pricing, and Collusion*, American Economic Review 110, 3267–3297
 (das nachgebaute Modell); dieselben (2021), *Algorithmic collusion with imperfect monitoring*, International Journal of Industrial Organization; Waltman und Kaymak (2008),
-*Q-learning agents in a Cournot oligopoly model*, Journal of Economic Dynamics and Control 32, 3275–3293 (Q-Lernen in einem Cournot-Modell, Gedächtnis und Erkundung als Einflussgrößen); Watkins und Dayan
+*Q-learning agents in a Cournot oligopoly model*, Journal of Economic Dynamics and Control 32, 3275–3293 (Q-Lernen in einem Cournot-Modell, Gedächtnis und Exploration als Einflussgrößen); Watkins und Dayan
 (1992), *Q-learning*, Machine Learning 8, 279–292. Nur Zusammenfassungen gelesen. Die Zahlen hier sind gerechnet, nicht aus den Aufsätzen übernommen.
         """
     )

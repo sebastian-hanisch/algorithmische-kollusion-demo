@@ -42,12 +42,12 @@ PRESETS = {
     "Kein Gedächtnis": {"alpha": DEFAULT_ALPHA, "beta": DEFAULT_BETA, "gamma": DEFAULT_GAMMA, "memory": "none", "seed": DEFAULT_SEED},
     "Kurzsichtig (γ = 0)": {"alpha": DEFAULT_ALPHA, "beta": DEFAULT_BETA, "gamma": 0.0, "memory": "both", "seed": DEFAULT_SEED},
     "Mittlere Voraussicht (γ = 0,5)": {"alpha": DEFAULT_ALPHA, "beta": DEFAULT_BETA, "gamma": 0.5, "memory": "both", "seed": DEFAULT_SEED},
-    "Kurze Erkundung (β = 20·10⁻⁵)": {"alpha": DEFAULT_ALPHA, "beta": 20, "gamma": DEFAULT_GAMMA, "memory": "both", "seed": DEFAULT_SEED},
+    "Kurze Exploration (β = 20·10⁻⁵)": {"alpha": DEFAULT_ALPHA, "beta": 20, "gamma": DEFAULT_GAMMA, "memory": "both", "seed": DEFAULT_SEED},
 }
 PRESET_HELP = {
     "Standardfall (Voreinstellung)": "Zwei Lernende wie bei Calvano et al.: Gedächtnis der letzten beiden Preise, γ = 0,95. Ein Lauf braucht im Median rund 600.000 Perioden.",
     "Kein Gedächtnis": "Beide kennen nur ihre eigenen Erfahrungen, nicht den letzten Preis des anderen: Eine Vergeltung ist gar nicht möglich.",
     "Kurzsichtig (γ = 0)": "Beide zählen nur den Gewinn der laufenden Periode: Es gibt keinen Grund, auf spätere Perioden Rücksicht zu nehmen.",
     "Mittlere Voraussicht (γ = 0,5)": "Spätere Perioden zählen halb so viel wie die laufende.",
-    "Kurze Erkundung (β = 20·10⁻⁵)": "Die Erkundung klingt zehnmal schneller ab als im Standardfall: Beide legen sich früh fest.",
+    "Kurze Exploration (β = 20·10⁻⁵)": "Die Exploration klingt zehnmal schneller ab als im Standardfall: Beide legen sich früh fest.",
 }
