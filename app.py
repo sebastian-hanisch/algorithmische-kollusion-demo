@@ -235,7 +235,7 @@ with st.expander("📐 Mathematische Formulierung"):
 |---|---|
 | $p_i$, $q_i$, $\pi_i$ | Preis, Nachfrageanteil und Gewinn von Anbieter $i$ |
 | $c$, $\mu$ | Grenzkosten; Streuungsparameter der Logit-Nachfrage (je kleiner, desto schärfer reagiert die Nachfrage auf Preisunterschiede) |
-| $a$, $a_0$ | Qualitätsindex der Anbieter und Index des Außenangebots (in $Q(s,a)$ steht $a$ dagegen für den gewählten Preis) |
+| $a$, $a_0$ | Qualitätsindex der Anbieter und Index des Outside Goods (in $Q(s,a)$ steht $a$ dagegen für den gewählten Preis) |
 | $p_N$, $p_M$ | Nash-Preis (Wettbewerb) und gemeinsamer Monopolpreis |
 | $\pi_N$, $\pi_M$, $\bar\pi$ | Gewinn je Anbieter bei $p_N$, bei $p_M$ und im Mittel des Dauerzustands |
 | $\Delta$ | Kollusionsindex: 0 bei Nash-Gewinn, 1 beim gemeinsamen Monopolgewinn |

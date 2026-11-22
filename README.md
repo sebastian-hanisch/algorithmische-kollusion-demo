@@ -20,7 +20,7 @@ dem Wettbewerbspreis liegen. Interessant ist, **was** diese Preise hält: eine g
 
 ## Modell
 
-Logit-Nachfrage (Qualität 2, Außenangebot 0, Preissensitivität 0,25, Grenzkosten 1), 15 Preise auf einem Raster, das etwas über Nash- und Monopolpreis hinausreicht.
+Logit-Nachfrage (Qualität 2, Außenangebot 0, Streuungsparameter μ = 0,25, Grenzkosten 1), 15 Preise auf einem Raster, das etwas über Nash- und Monopolpreis hinausreicht.
 Zwei unabhängige tabellarische Q-Lernende, Zustand = die beiden letzten Preise, Exploration ε = e^(−β·t). Kennzahl: **Kollusionsindex** Δ = (π̄ − π_N) / (π_M − π_N).
 
 ## Methodik
